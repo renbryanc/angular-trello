@@ -9,6 +9,6 @@ angular.module('angularTrello', [
   'angularTrello.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', {templateUrl: 'partials/main_board.html', controller: 'MainBoardCtrl'});
+  $routeProvider.when('/', {templateUrl: 'partials/mainBoard.html', controller: 'MainBoardCtrl'});
   $routeProvider.otherwise({redirectTo: '/'});
 }]);
