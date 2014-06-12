@@ -1,6 +1,6 @@
 <div class="column" ng-repeat="(name, column) in columns">
   <h3>{{name}}</h3>
-  <div class="card" ng-repeat="(name, card) in column.cards">
+  <div class="card" ng-repeat="(name, card) in column.cards" trello-draggable>
     <h4>{{name}}</h4>
     <p>{{card.description}}</p>
     <a href="" class="x-button" ng-click="deleteCard(column.cards, name)">&#x2717;</a>
