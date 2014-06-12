@@ -7,9 +7,17 @@ angular.module('angularTrello.controllers', [])
     $scope.columns = {};
 
     $scope.addColumn = function(name) {
-      $scope.columns[name] = {};
+      $scope.columns[name] = {cards: {}};
+    };
+
+    $scope.addCard = function(columnId, cardName, cardDescription) {
+      var col = $scope.columns[columnId];
+      col.cards[cardName] = {description: cardDescription};
     };
 
     $scope.addColumn("Column 1");
+    $scope.addCard("Column 1", "Card 1", "Fix up the css!");
+    $scope.addCard("Column 1", "Card 2", "Add some ids!");
     $scope.addColumn("Column 2");
+    $scope.addCard("Column 2", "Card 3", "Write some tests!");
   }]);
