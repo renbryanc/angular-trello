@@ -11,3 +11,9 @@
 .column > h3 {
   border-bottom: 1px black solid;
 }
+
+.card {
+  border: 1px black solid;
+  padding: 10px;
+  margin-bottom: 10px;
+}
