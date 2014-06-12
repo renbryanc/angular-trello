@@ -15,6 +15,11 @@ angular.module('angularTrello.controllers', [])
       col.cards[cardName] = {description: cardDescription};
     };
 
+    $scope.deleteCard = function(cards, cardName) {
+      console.log("Deleting " + cardName);
+      delete cards[cardName];
+    };
+
     $scope.addColumn("Column 1");
     $scope.addCard("Column 1", "Card 1", "Fix up the css!");
     $scope.addCard("Column 1", "Card 2", "Add some ids!");

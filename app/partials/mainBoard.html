@@ -3,5 +3,6 @@
   <div class="card" ng-repeat="(name, card) in column.cards">
     <h4>{{name}}</h4>
     <p>{{card.description}}</p>
+    <a href="" class="x-button" ng-click="deleteCard(column.cards, name)">&#x2717;</a>
   </div>
 </div>
