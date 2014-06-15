@@ -23,6 +23,7 @@ angular.module('angularTrello.directives', []).
         $document.off('mousemove', onMouseMove);
         $document.off('mouseup', onMouseUp);
         scope.$emit('draggable-dropped', elm);
+        elm.css({'z-index': 0});
         e.preventDefault();
       };
 
@@ -30,7 +31,8 @@ angular.module('angularTrello.directives', []).
         startX = e.pageX - elm.position().left;
         startY = e.pageY - elm.position().top;
         elm.css({'width': elm.width() + 'px',
-                 'height': elm.height() + 'px'});
+                 'height': elm.height() + 'px',
+                 'z-index': 99});
         $document.on('mousemove', onMouseMove);
         $document.on('mouseup', onMouseUp);
       });
