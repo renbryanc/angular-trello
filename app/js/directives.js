@@ -14,15 +14,21 @@ angular.module('angularTrello.directives', []).
         x = e.pageX;
         y = e.pageY;
         elm.css({'position': 'absolute',
-                 'top': x,
-                 'left': y});
+                 'top': y,
+                 'left': x});
+        e.preventDefault();
       };
   
-      debugger;
+      var onMouseUp = function(e) {
+        console.log('mouseup!');
+        $document.off('mousemove', onMouseMove);
+        $document.off('mouseup', onMouseUp);
+        e.preventDefault();
+      };
 
-      elm.click(function() {
-        console.log("clicked!");
-        elm.mouseMove(onMouseMove);
+      elm.on('mousedown', function() {
+        $document.on('mousemove', onMouseMove);
+        $document.on('mouseup', onMouseUp);
       });
     };
   }]);
