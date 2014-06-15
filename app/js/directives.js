@@ -22,13 +22,15 @@ angular.module('angularTrello.directives', []).
       var onMouseUp = function(e) {
         $document.off('mousemove', onMouseMove);
         $document.off('mouseup', onMouseUp);
-        scope.$emit('draggable-dropped', x, y);
+        scope.$emit('draggable-dropped', elm);
         e.preventDefault();
       };
 
       elm.on('mousedown', function(e) {
         startX = e.pageX - elm.position().left;
         startY = e.pageY - elm.position().top;
+        elm.css({'width': elm.width() + 'px',
+                 'height': elm.height() + 'px'});
         $document.on('mousemove', onMouseMove);
         $document.on('mouseup', onMouseUp);
       });
