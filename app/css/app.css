@@ -18,6 +18,19 @@
   margin-bottom: 10px;
   position: relative;
   background-color: white;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.card:hover {
+  background-color: grey;
+}
+
+.card.dragging {
+  position: absolute;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  z-index: 99;
 }
 
 .x-button {

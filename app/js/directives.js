@@ -3,7 +3,7 @@
 /* Directives */
 
 angular.module('angularTrello.directives', []).
-  directive('trelloDraggable', ['$document', function($document) {
+  directive('trelloDraggable', ['$document', '$rootScope', function($document, $rootScope) {
     return function(scope, elm, attrs) {
       var x = 0,
           y = 0,
@@ -13,8 +13,7 @@ angular.module('angularTrello.directives', []).
       var onMouseMove = function(e) {
         x = e.pageX - startX;
         y = e.pageY - startY;
-        elm.css({'position': 'absolute',
-                 'top': y,
+        elm.css({'top': y,
                  'left': x});
         e.preventDefault();
       };
@@ -22,8 +21,8 @@ angular.module('angularTrello.directives', []).
       var onMouseUp = function(e) {
         $document.off('mousemove', onMouseMove);
         $document.off('mouseup', onMouseUp);
-        scope.$emit('draggable-dropped', elm);
-        elm.css({'z-index': 0});
+        $rootScope.$broadcast('draggable-dropped', elm, scope.card);
+        elm.removeClass('dragging');
         e.preventDefault();
       };
 
@@ -31,10 +30,23 @@ angular.module('angularTrello.directives', []).
         startX = e.pageX - elm.position().left;
         startY = e.pageY - elm.position().top;
         elm.css({'width': elm.width() + 'px',
-                 'height': elm.height() + 'px',
-                 'z-index': 99});
+                 'height': elm.height() + 'px'});
+        elm.addClass('dragging');
         $document.on('mousemove', onMouseMove);
         $document.on('mouseup', onMouseUp);
+      });
+    };
+  }]).
+  directive('trelloDragZone', ['$document', function($document) {
+    return function(scope, elm, attrs) {
+      var left = elm.position().left,
+          right = left + elm.width();
+      scope.$on('draggable-dropped', function(e, draggedElm, card) {
+        var draggedX = draggedElm.position().left;
+        if (draggedX >= left && draggedX < right) {
+          e.currentScope.column.cards.push(card);
+          debugger;
+        }
       });
     };
   }]);
