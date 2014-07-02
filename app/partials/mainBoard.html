@@ -1,8 +1,10 @@
 <div class="column" ng-repeat="column in columns" trello-drag-zone>
   <h3>{{column.name}}</h3>
-  <div class="card" ng-repeat="card in column.cards" trello-draggable>
-    <h4>{{card.name}}</h4>
-    <p>{{card.description}}</p>
-    <a href="" class="x-button" ng-click="deleteCard(column.cards, $index)">&#x2717;</a>
+  <div class="card" ng-repeat="card in column.cards" ng-class="{phantom: card.isPhantom}" trello-draggable>
+    <div ng-if="!card.isPhantom">
+      <h4>{{card.name}}</h4>
+      <p>{{card.description}}</p>
+      <a href="" class="x-button" ng-click="deleteCard(column.cards, $index)">&#x2717;</a>
+    </div>
   </div>
 </div>

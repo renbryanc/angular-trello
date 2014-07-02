@@ -7,9 +7,10 @@
 // In this case it is a simple value service.
 angular.module('angularTrello.services', [])
   .factory('Card', function() {
-    var Card = function(name, description) {
+    var Card = function(name, description, opt_isPhantom) {
       this.name = name || 'New Card';
       this.description = description || 'This is my new card';
+      this.isPhantom = opt_isPhantom || false;
     };
 
     return Card;
@@ -22,6 +23,10 @@ angular.module('angularTrello.services', [])
 
     Column.prototype.add = function(card) {
       this.cards.push(card);
+    };
+
+    Column.prototype.addAt = function(card, i) {
+      this.cards.splice(i, 0, card);
     };
 
     Column.prototype.remove = function(card) {
