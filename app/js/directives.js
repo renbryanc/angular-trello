@@ -45,6 +45,9 @@ angular.module('angularTrello.directives', [
 
         $document.on('mousemove', onMouseMove);
         $document.on('mouseup', onMouseUp);
+      
+        // call this so we add the phantom and update the x/y coords
+        onMouseMove(e);
       });
     };
   }]).
@@ -67,9 +70,8 @@ angular.module('angularTrello.directives', [
       };
 
       var addPhantomAt = function(i) {
-        if(!containsPhantom()) {
-          column.addAt(phantom, i);
-        }
+        removePhantom();
+        column.addAt(phantom, i);
       };
 
       var updatePhantomToMatch = function(elm) {
@@ -94,19 +96,27 @@ angular.module('angularTrello.directives', [
 
       var calculateMidpoints = function(columnEl) {
         var output = [];
-        columnEl.find('.card');
+        columnEl.find('.card').not('.dragging').not('.phantom')
+          .each(function(i, el) {
+            output.push(yMidpoint($(el)));
+          });
         return output;
       };
 
       var getIndexOf = function(el) {
         var y = yMidpoint(el);
         var midpoints = calculateMidpoints(elm);
-        return 0; 
+        var i = 0;
+        while (midpoints[i] < y && i < midpoints.length) {
+          i++;
+        }
+        console.log(midpoints);
+        console.log(i);
+        return i; 
       };
 
       scope.$on('draggable-dropped', function(e, draggedElm) {
         if (elementIsClosest(draggedElm)) {
-          debugger;
           var card = draggedElm.scope().card;
           var oldColumn = draggedElm.scope().$parent.column;
         
@@ -117,18 +127,15 @@ angular.module('angularTrello.directives', [
           
           draggedElm.scope().$apply();
           scope.$apply();
-
-          updatePhantomToMatch(draggedElm);
         }
       });
       scope.$on('draggable-dragged', function(e, draggedElm) {
-        var closest = elementIsClosest(draggedElm);
-        var phantomAdded = containsPhantom();
-        if (!phantomAdded && closest) {
+        if (elementIsClosest(draggedElm)) {
           addPhantomAt(getIndexOf(draggedElm));
           scope.$apply();
           updatePhantomToMatch(draggedElm);
-        } else if (phantomAdded && !closest) {
+        } else if (containsPhantom()) {
+          // we are no longer the closest column :( remove the phantom
           removePhantom();
           scope.$apply();
         }
