@@ -11,7 +11,4 @@ angular.module('angularTrello.controllers', [
     columns.add(new Column('testing 2', [new Card('Card 2', 'Description')]));
   }])
   .controller('ColumnController', ['$scope', function($scope) {
-    $scope.$on('draggable-dropped', function(e, elm, card) {
-
-    });
   }]);

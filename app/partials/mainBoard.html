@@ -4,7 +4,7 @@
     <div ng-if="!card.isPhantom">
       <h4>{{card.name}}</h4>
       <p>{{card.description}}</p>
-      <a href="" class="x-button" ng-click="deleteCard(column.cards, $index)">&#x2717;</a>
+      <a href="" class="x-button" ng-click="column.remove(card)">&#x2717;</a>
     </div>
   </div>
 </div>
