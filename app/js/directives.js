@@ -96,7 +96,7 @@ angular.module('angularTrello.directives', [
 
       var calculateMidpoints = function(columnEl) {
         var output = [];
-        columnEl.find('.card').not('.dragging').not('.phantom')
+        columnEl.find('.card').not('.dragging')
           .each(function(i, el) {
             output.push(yMidpoint($(el)));
           });
