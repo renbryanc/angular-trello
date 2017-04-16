@@ -29,8 +29,6 @@
     "angular-loader": "^1.6.4",
     "angular-mocks": "^1.6.4",
     "angular-route": "^1.6.4",
-    "expose-loader": "^0.7.3",
-    "html5-boilerplate": "0.0.1",
     "jquery": "^3.2.1"
   }
 }
