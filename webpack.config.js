@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  context: __dirname + '/app',
+  context: __dirname + '/src/app',
   entry: {
     app: './app.js',
     vendor: ['angular', 'angular-route', 'jquery']

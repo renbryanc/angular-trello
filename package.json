@@ -6,12 +6,14 @@
   "repository": "https://github.com/trhodeos/angular-trello",
   "license": "MIT",
   "devDependencies": {
+    "css-loader": "^0.28.0",
+    "style-loader": "^0.16.1",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2"
   },
   "scripts": {
     "bundle": "webpack",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server"
   },
   "dependencies": {
     "angular": "^1.6.4",
