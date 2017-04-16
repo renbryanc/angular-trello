@@ -1,6 +1,5 @@
 'use strict';
 
-const jQuery = require('jQuery');
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
