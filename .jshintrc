@@ -6,6 +6,8 @@
   "funcscope": true,
   "globalstrict": true,
   "globals": {
+    "__dirname": false /* writeable */,
+    "module": false /* writeable */,
     "require": false /* writeable */
   },
   "strict": "implied",
