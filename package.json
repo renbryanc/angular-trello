@@ -6,24 +6,12 @@
   "repository": "https://github.com/trhodeos/angular-trello",
   "license": "MIT",
   "devDependencies": {
-    "http-server": "~0.9.0",
-    "karma": "~1.0",
-    "karma-junit-reporter": "~1.2.0",
-    "protractor": "~5.1.0",
-    "shelljs": "~0.7.0",
     "webpack": "^2.4.1",
     "webpack-dev-server": "^2.4.2"
   },
   "scripts": {
     "bundle": "webpack",
     "start": "webpack-dev-server",
-    "pretest": "npm install",
-    "test": "karma start test/karma.conf.js",
-    "test-single-run": "karma start test/karma.conf.js  --single-run",
-    "preupdate-webdriver": "npm install",
-    "update-webdriver": "webdriver-manager update",
-    "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor test/protractor-conf.js"
   },
   "dependencies": {
     "angular": "^1.6.4",
