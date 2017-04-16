@@ -1,22 +1,18 @@
-'use strict';
-
 const angular = require('angular');
 const $ = require('jquery');
 const services = require('./services');
-
-/* Directives */
 
 angular.module('angularTrello.directives', [
       'angularTrello.services'
     ]).
   directive('trelloDraggable', ['$document', '$rootScope', function($document, $rootScope) {
     return function(scope, elm, attrs) {
-      var x = 0,
+      let x = 0,
           y = 0,
           startX = 0,
           startY = 0;
 
-      var onMouseMove = function(e) {
+      const onMouseMove = function(e) {
         e.preventDefault();
 
         x = e.pageX - startX;
@@ -27,7 +23,7 @@ angular.module('angularTrello.directives', [
         $rootScope.$broadcast('draggable-dragged', elm);
       };
 
-      var onMouseUp = function(e) {
+      const onMouseUp = function(e) {
         e.preventDefault();
 
         $document.off('mousemove', onMouseMove);
@@ -57,49 +53,49 @@ angular.module('angularTrello.directives', [
   }]).
   directive('trelloDragZone', ['Card', function(Card) {
     return function(scope, elm, attrs) {
-      var left = elm.position().left,
+      const left = elm.position().left,
           right = left + elm.width();
 
-      var phantom = new Card('','', true);
-      var column = scope.column;
+      const phantom = new Card('','', true);
+      let column = scope.column;
 
-      var containsPhantom = function() {
+      const containsPhantom = function() {
         return column.indexOf(phantom) > -1;
       };
 
-      var removePhantom = function() {
+      const removePhantom = function() {
         if (containsPhantom()) {
           column.remove(phantom);
         }
       };
 
-      var addPhantomAt = function(i) {
+      const addPhantomAt = function(i) {
         removePhantom();
         column.addAt(phantom, i);
       };
 
-      var updatePhantomToMatch = function(elm) {
+      const updatePhantomToMatch = function(elm) {
         angular.element('.phantom').css({
           width: elm.width() + 'px',
           height: elm.height() + 'px'
         });
       };
 
-      var yMidpoint = function(el) {
+      const yMidpoint = function(el) {
         return el.position().top + el.height() / 2;
       };
 
-      var xMidpoint = function(el) {
+      const xMidpoint = function(el) {
         return el.position().left + el.width() / 2;
       };
 
-      var elementIsClosest = function(otherElm) {
-        var otherX = xMidpoint(otherElm);
+      const elementIsClosest = function(otherElm) {
+        const otherX = xMidpoint(otherElm);
         return otherX >= left && otherX < right;
       };
 
-      var calculateMidpoints = function(columnEl) {
-        var output = [];
+      const calculateMidpoints = function(columnEl) {
+        let output = [];
         columnEl.find('.card').not('.dragging')
           .each(function(i, el) {
             output.push(yMidpoint($(el)));
@@ -107,10 +103,10 @@ angular.module('angularTrello.directives', [
         return output;
       };
 
-      var getIndexOf = function(el) {
-        var y = yMidpoint(el);
-        var midpoints = calculateMidpoints(elm);
-        var i = 0;
+      const getIndexOf = function(el) {
+        const y = yMidpoint(el);
+        const midpoints = calculateMidpoints(elm);
+        let i = 0;
         while (midpoints[i] < y && i < midpoints.length) {
           i++;
         }
@@ -119,8 +115,8 @@ angular.module('angularTrello.directives', [
 
       scope.$on('draggable-dropped', function(e, draggedElm) {
         if (elementIsClosest(draggedElm)) {
-          var card = draggedElm.scope().card;
-          var oldColumn = draggedElm.scope().$parent.column;
+          const card = draggedElm.scope().card;
+          let oldColumn = draggedElm.scope().$parent.column;
 
           removePhantom();
 

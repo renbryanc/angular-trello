@@ -1,14 +1,8 @@
-'use strict';
-
 const angular = require('angular');
 
-/* Services */
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('angularTrello.services', [])
   .factory('Card', function() {
-    var Card = function(name, description, opt_isPhantom) {
+    const Card = function(name, description, opt_isPhantom) {
       this.name = name || 'New Card';
       this.description = description || 'This is my new card';
       this.isPhantom = opt_isPhantom || false;
@@ -17,7 +11,7 @@ angular.module('angularTrello.services', [])
     return Card;
   })
   .factory('Column', function() {
-    var Column = function(name, cards) {
+    const Column = function(name, cards) {
       this.name = name;
       this.cards = cards || [];
     };
@@ -41,7 +35,7 @@ angular.module('angularTrello.services', [])
     return Column;
   })
   .service('columns', function() {
-    var columns = [];
+    let columns = [];
     return {
       getAllColumns: function() {
         return columns;

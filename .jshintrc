@@ -1,7 +1,13 @@
 {
+  "curly": true,
+  "esversion": 6,
+  "forin": true,
+  "freeze": true,
+  "funcscope": true,
   "globalstrict": true,
   "globals": {
-    "require": true
+    "require": false /* writeable */
   },
-  "esversion": 6
+  "strict": "implied",
+  "varstmt": true
 }

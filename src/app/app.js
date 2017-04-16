@@ -1,5 +1,3 @@
-'use strict';
-
 const angular = require('angular');
 const ngRoute = require('angular-route');
 
@@ -8,7 +6,6 @@ const directives = require('./directives');
 const filters = require('./filters');
 const services = require('./services');
 
-// Declare app level module which depends on filters, and services
 angular.module('angularTrello', [
   ngRoute,
   'angularTrello.filters',

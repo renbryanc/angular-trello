@@ -1,9 +1,5 @@
-'use strict';
-
 const angular = require('angular');
 const services = require('./services');
-
-/* Controllers */
 
 angular.module('angularTrello.controllers', [
       'angularTrello.services'
