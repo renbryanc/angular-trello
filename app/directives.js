@@ -13,10 +13,10 @@ angular.module('angularTrello.directives', [
           y = 0,
           startX = 0,
           startY = 0;
-      
+
       var onMouseMove = function(e) {
         e.preventDefault();
-        
+
         x = e.pageX - startX;
         y = e.pageY - startY;
         elm.css({'top': y,
@@ -24,13 +24,13 @@ angular.module('angularTrello.directives', [
 
         $rootScope.$broadcast('draggable-dragged', elm);
       };
-  
+
       var onMouseUp = function(e) {
         e.preventDefault();
-        
+
         $document.off('mousemove', onMouseMove);
         $document.off('mouseup', onMouseUp);
-       
+
         $rootScope.$broadcast('draggable-dropped', elm);
 
         elm.removeClass('dragging');
@@ -40,14 +40,14 @@ angular.module('angularTrello.directives', [
       elm.on('mousedown', function(e) {
         startX = e.pageX - elm.position().left;
         startY = e.pageY - elm.position().top;
-        
+
         elm.css({'width': elm.width() + 'px',
                  'height': elm.height() + 'px'});
         elm.addClass('dragging');
 
         $document.on('mousemove', onMouseMove);
         $document.on('mouseup', onMouseUp);
-      
+
         // call this so we add the phantom and update the x/y coords
         onMouseMove(e);
       });
@@ -78,7 +78,7 @@ angular.module('angularTrello.directives', [
 
       var updatePhantomToMatch = function(elm) {
         angular.element('.phantom').css({
-          width: elm.width() + 'px', 
+          width: elm.width() + 'px',
           height: elm.height() + 'px'
         });
       };
@@ -114,19 +114,19 @@ angular.module('angularTrello.directives', [
         }
         console.log(midpoints);
         console.log(i);
-        return i; 
+        return i;
       };
 
       scope.$on('draggable-dropped', function(e, draggedElm) {
         if (elementIsClosest(draggedElm)) {
           var card = draggedElm.scope().card;
           var oldColumn = draggedElm.scope().$parent.column;
-        
+
           removePhantom();
-          
+
           oldColumn.remove(card);
           column.addAt(card, getIndexOf(draggedElm));
-          
+
           draggedElm.scope().$apply();
           scope.$apply();
         }

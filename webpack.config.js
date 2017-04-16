@@ -3,7 +3,7 @@ module.exports = {
   context: __dirname + '/app',
   entry: {
     app: './app.js',
-    vendor: ['angular', 'angular-route']
+    vendor: ['angular', 'angular-route', 'jQuery']
   },
   output: {
     path: __dirname + '/dist',
