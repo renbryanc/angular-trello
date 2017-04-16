@@ -3,14 +3,52 @@ const angular = require('angular');
 angular.module('angularTrello.services', [])
   .factory('Card', () => class {
     constructor(name, description, opt_isPhantom) {
-      this.name = name || 'New Card';
-      this.description = description || 'This is my new card';
+      this.name = name || 'Card name unset';
+      this.description = description || 'Description unset';
       this.isPhantom = opt_isPhantom || false;
     }
   })
+  .factory('Node', () => class {
+    constructor(item, next, previous) {
+      this.item = item;
+      this.nextNode = next;
+      this.previousNode = previous;
+    }
+    get() {
+      return this.item;
+    }
+
+    setNext(next) {
+      this.nextNode = next;
+    }
+
+    getNext() {
+      return this.nextNode;
+    }
+
+    setPrevious(prev) {
+      this.previousNode = prev;
+    }
+
+    getPrevious() {
+      return this.previousNode;
+    }
+
+    swap(other) {
+      const otherNext = other.getNext();
+      const otherPrev = other.getPrevious();
+      other.setNext(this.getNext());
+      other.setPrevious(this.getPrevious());
+      this.setNext(otherNext);
+      this.setPrevious(otherPrev);
+    }
+  })
+  .factory('LinkedList', () => class {
+
+  })
   .factory('Column', () => class {
     constructor(name, cards) {
-      this.name = name;
+      this.name = name || 'Name unset';
       this.cards = cards || [];
     }
 
@@ -30,7 +68,7 @@ angular.module('angularTrello.services', [])
       return this.cards.indexOf(card);
     }
   })
-  .service('columns', class {
+  .service('ColumnService', class {
     constructor() {
       this.columns = [];
     }

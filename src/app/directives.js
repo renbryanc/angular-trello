@@ -5,14 +5,14 @@ const services = require('./services');
 angular.module('angularTrello.directives', [
       'angularTrello.services'
     ]).
-  directive('trelloDraggable', ['$document', '$rootScope', function($document, $rootScope) {
-    return function(scope, elm, attrs) {
+  directive('trelloDraggable', ['$document', '$rootScope', ($document, $rootScope) => {
+    return (scope, elm, attrs) => {
       let x = 0,
           y = 0,
           startX = 0,
           startY = 0;
 
-      const onMouseMove = function(e) {
+      const onMouseMove = (e) => {
         e.preventDefault();
 
         x = e.pageX - startX;
@@ -23,7 +23,7 @@ angular.module('angularTrello.directives', [
         $rootScope.$broadcast('draggable-dragged', elm);
       };
 
-      const onMouseUp = function(e) {
+      const onMouseUp = (e) => {
         e.preventDefault();
 
         $document.off('mousemove', onMouseMove);
@@ -35,7 +35,7 @@ angular.module('angularTrello.directives', [
         elm.removeAttr('style');
       };
 
-      elm.on('mousedown', function(e) {
+      elm.on('mousedown', (e) => {
         startX = e.pageX - elm.position().left;
         startY = e.pageY - elm.position().top;
 
@@ -51,59 +51,59 @@ angular.module('angularTrello.directives', [
       });
     };
   }]).
-  directive('trelloDragZone', ['Card', function(Card) {
-    return function(scope, elm, attrs) {
+  directive('trelloDragZone', ['Card', (Card) => {
+    return (scope, elm, attrs) => {
       const left = elm.position().left,
           right = left + elm.width();
 
       const phantom = new Card('','', true);
       let column = scope.column;
 
-      const containsPhantom = function() {
+      const containsPhantom = () => {
         return column.indexOf(phantom) > -1;
       };
 
-      const removePhantom = function() {
+      const removePhantom = () => {
         if (containsPhantom()) {
           column.remove(phantom);
         }
       };
 
-      const addPhantomAt = function(i) {
+      const addPhantomAt = (i) => {
         removePhantom();
         column.addAt(phantom, i);
       };
 
-      const updatePhantomToMatch = function(elm) {
+      const updatePhantomToMatch = (elm) => {
         angular.element('.phantom').css({
           width: elm.width() + 'px',
           height: elm.height() + 'px'
         });
       };
 
-      const yMidpoint = function(el) {
+      const yMidpoint = (el) => {
         return el.position().top + el.height() / 2;
       };
 
-      const xMidpoint = function(el) {
+      const xMidpoint = (el) => {
         return el.position().left + el.width() / 2;
       };
 
-      const elementIsClosest = function(otherElm) {
+      const elementIsClosest = (otherElm) => {
         const otherX = xMidpoint(otherElm);
         return otherX >= left && otherX < right;
       };
 
-      const calculateMidpoints = function(columnEl) {
+      const calculateMidpoints = (columnEl) => {
         let output = [];
         columnEl.find('.card').not('.dragging')
-          .each(function(i, el) {
+          .each((i, el) => {
             output.push(yMidpoint($(el)));
           });
         return output;
       };
 
-      const getIndexOf = function(el) {
+      const getIndexOf = (el) => {
         const y = yMidpoint(el);
         const midpoints = calculateMidpoints(elm);
         let i = 0;
@@ -113,7 +113,7 @@ angular.module('angularTrello.directives', [
         return i;
       };
 
-      scope.$on('draggable-dropped', function(e, draggedElm) {
+      scope.$on('draggable-dropped', (e, draggedElm) => {
         if (elementIsClosest(draggedElm)) {
           const card = draggedElm.scope().card;
           let oldColumn = draggedElm.scope().$parent.column;
@@ -127,7 +127,7 @@ angular.module('angularTrello.directives', [
           scope.$apply();
         }
       });
-      scope.$on('draggable-dragged', function(e, draggedElm) {
+      scope.$on('draggable-dragged', (e, draggedElm) => {
         if (elementIsClosest(draggedElm)) {
           addPhantomAt(getIndexOf(draggedElm));
           scope.$apply();
