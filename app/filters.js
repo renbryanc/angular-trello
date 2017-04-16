@@ -1,5 +1,7 @@
 'use strict';
 
+var angular = require('angular');
+
 /* Filters */
 
 angular.module('angularTrello.filters', []).

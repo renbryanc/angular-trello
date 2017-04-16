@@ -6,15 +6,15 @@
   "repository": "https://github.com/trhodeos/angular-trello",
   "license": "MIT",
   "devDependencies": {
-    "karma": "~1.0",
-    "protractor": "~5.1.0",
     "http-server": "~0.9.0",
+    "karma": "~1.0",
+    "karma-junit-reporter": "~1.2.0",
+    "protractor": "~5.1.0",
     "shelljs": "~0.7.0",
-    "karma-junit-reporter": "~1.2.0"
+    "webpack": "^2.4.1"
   },
   "scripts": {
-    "postinstall": "bower install",
-    "prestart": "npm install",
+    "bundle": "webpack",
     "start": "http-server -a localhost -p 8000",
     "pretest": "npm install",
     "test": "karma start test/karma.conf.js",
@@ -22,8 +22,7 @@
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
     "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor test/protractor-conf.js",
-    "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + cat('app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\""
+    "protractor": "protractor test/protractor-conf.js"
   },
   "dependencies": {
     "angular": "^1.6.4",

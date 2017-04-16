@@ -1,5 +1,8 @@
 'use strict';
 
+var angular = require('angular');
+require('./services');
+
 /* Controllers */
 
 angular.module('angularTrello.controllers', [

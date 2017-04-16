@@ -1,5 +1,7 @@
 'use strict';
 
+var angular = require('angular');
+
 /* Directives */
 
 angular.module('angularTrello.directives', [
