@@ -113,8 +113,6 @@ angular.module('angularTrello.directives', [
         while (midpoints[i] < y && i < midpoints.length) {
           i++;
         }
-        console.log(midpoints);
-        console.log(i);
         return i;
       };
 
