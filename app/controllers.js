@@ -1,12 +1,12 @@
 'use strict';
 
-var angular = require('angular');
-require('./services');
+const angular = require('angular');
+const services = require('./services');
 
 /* Controllers */
 
 angular.module('angularTrello.controllers', [
-    'angularTrello.services'
+      'angularTrello.services'
     ])
   .controller('MainBoardCtrl', ['$scope', 'columns', 'Column', 'Card', function($scope, columns, Column, Card) {
     $scope.columns = columns.getAllColumns();

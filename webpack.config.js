@@ -1,4 +1,6 @@
 var webpack = require('webpack');
+var path = require('path');
+
 module.exports = {
   context: __dirname + '/app',
   entry: {
@@ -6,7 +8,8 @@ module.exports = {
     vendor: ['angular', 'angular-route', 'jquery']
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
     filename: 'app.bundle.js'
   },
   plugins: [

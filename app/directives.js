@@ -1,7 +1,8 @@
 'use strict';
 
-var angular = require('angular');
-var $ = require('jquery');
+const angular = require('angular');
+const $ = require('jquery');
+const services = require('./services');
 
 /* Directives */
 
