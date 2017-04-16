@@ -12,6 +12,18 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'app.bundle.js'
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
+        use: [
+          { loader: 'jshint-loader' }
+        ]
+      }
+    ],
+  },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.bundle.js'}),
     new webpack.ProvidePlugin({'window.jQuery': 'jquery'})
