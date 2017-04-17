@@ -4,7 +4,8 @@ const services = require('./services');
 angular.module('angularTrello.controllers', [
       'angularTrello.services'
     ])
-  .controller('MainBoardCtrl', ['$scope', 'ColumnService', 'Column', 'Card', function($scope, columns, Column, Card) {
+  .controller('MainBoardController',
+  ['$scope', 'ColumnService', 'Column', 'Card', function($scope, columns, Column, Card) {
     $scope.columns = columns.getAllColumns();
 
     // Test cards.
